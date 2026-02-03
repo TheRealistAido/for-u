@@ -3,48 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For You 🌸</title>
+    <title>For My Favorite 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --dull-pink: #d8a7b1;
-            --dusty-rose: #b3818a;
-            --warm-cream: #f9f5f3;
-            --text: #6b5356;
+            --dull-pink: #e2b4bd;
+            --dusty-rose: #9b6b6b;
+            --soft-glow: rgba(255, 255, 255, 0.3);
+            --text-color: #5d4e50;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
 
         body {
-            background-color: var(--warm-cream);
-            color: var(--text);
+            background: #fdf6f6;
+            color: var(--text-color);
             overflow: hidden;
             touch-action: pan-y;
-            height: 100vh;
-            width: 100vw;
         }
 
-        /* Floating Animation */
+        /* Animated Background Gradient */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #f7e1e5 0%, #fdf6f6 100%);
+            z-index: -1;
+        }
+
+        /* Floating Hearts */
         .heart {
             position: fixed;
-            bottom: -2vh;
+            bottom: -5vh;
             pointer-events: none;
             z-index: 100;
             opacity: 0;
-            animation: floatUp 4s ease-in forwards;
+            animation: floatUp 5s ease-in forwards;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            20% { opacity: 0.6; }
-            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(45deg); opacity: 0; }
         }
 
-        /* Snap Container */
         .scroller {
             display: flex;
             overflow-x: auto;
@@ -67,104 +73,98 @@
             align-items: center;
             padding: 40px;
             text-align: center;
-            position: relative;
+        }
+
+        /* Glassmorphism Card Effect */
+        .card {
+            background: var(--soft-glow);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(226, 180, 189, 0.2);
+            max-width: 85%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
             color: var(--dusty-rose);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
             font-weight: 500;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
         }
 
         p {
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.6;
-            max-width: 280px;
-            font-weight: 300;
+            color: var(--text-color);
         }
 
-        .bold {
-            color: var(--dusty-rose);
-            font-weight: 600;
+        .highlight {
+            color: #d18d99;
+            font-weight: 500;
         }
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            filter: grayscale(0.2);
-        }
-
-        .swipe-hint {
+        /* Floating Swipe Indicator */
+        .swipe-box {
             position: fixed;
             bottom: 40px;
-            width: 100%;
-            text-align: center;
             font-size: 0.7rem;
             letter-spacing: 2px;
-            opacity: 0.4;
-            animation: breathe 2s infinite;
+            opacity: 0.5;
+            text-transform: uppercase;
         }
 
-        @keyframes breathe {
-            0%, 100% { opacity: 0.2; transform: translateX(0); }
-            50% { opacity: 0.5; transform: translateX(5px); }
+        /* Special Surprise Button */
+        #surprise-btn {
+            margin-top: 20px;
+            background: var(--dull-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow"></div>
+
     <div class="scroller">
         <section class="slide">
-            <div class="icon">☁️</div>
-            <h1>hey.</h1>
-            <p>i made something for you because i couldn't just do nothing today.</p>
+            <div class="card">
+                <p style="font-size: 2rem; margin-bottom: 10px;">☁️</p>
+                <h1>hey you.</h1>
+                <p>i put this together because i couldn't just let today pass by like any other day.</p>
+            </div>
         </section>
 
         <section class="slide">
-            <div class="icon">⌛</div>
-            <h1>finally.</h1>
-            <p>i've been waiting to show you this for a bit... <span class="bold">13 days</span> was way harder to wait out than i thought.</p>
+            <div class="card">
+                <p style="font-size: 2rem; margin-bottom: 10px;">⌛</p>
+                <h1>finally...</h1>
+                <p>i've been waiting way too long to show you this. <span class="highlight">13 days</span> was actually painful lol, but i'm glad you're seeing it now.</p>
+            </div>
         </section>
 
         <section class="slide">
-            <div class="icon">🎀</div>
-            <h1>just so you know...</h1>
-            <p>you’re easily my <span class="bold">favorite person</span> to be around. things just feel better when you're there.</p>
+            <div class="card">
+                <p style="font-size: 2rem; margin-bottom: 10px;">🌸</p>
+                <h1>just a thought.</h1>
+                <p>you're easily my <span class="highlight">favorite person</span>. things just feel a lot more "right" when you're around.</p>
+            </div>
         </section>
 
         <section class="slide">
-            <div class="icon">🧸</div>
-            <h1>a little reminder.</h1>
-            <p>i really hope you have the most peaceful and happy valentine's. you deserve all the good energy.</p>
-        </section>
-
-        <section class="slide">
-            <div class="icon">🌸</div>
-            <h1>happy valentine's.</h1>
-            <p>enjoy this day to the absolute fullest. <br><br> <span style="font-size: 0.8rem; opacity: 0.6;">(end)</span></p>
-        </section>
-    </div>
-
-    <div class="swipe-hint">SWIPE LEFT ➔</div>
-
-    <script>
-        const symbols = ['🌸', '🤍', '✨', '☁️', '🧸'];
-        
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (Math.random() * 15 + 15) + "px";
-            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
-            document.body.appendChild(heart);
-
-            setTimeout(() => { heart.remove(); }, 4000);
-        }
-
-        setInterval(createHeart, 600);
-    </script>
-</body>
-</html>
+            <div class="card">
+                <p style="font-size: 2rem; margin-bottom: 10px;">🧸</p>
+                <h1>be happy.</h1>
+                <p>
