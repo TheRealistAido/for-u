@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For You 🌸</title>
+    <style>
+        :root {
+            --dull-pink: #d8a7b1;
+            --dusty-rose: #b3818a;
+            --warm-cream: #f9f5f3;
+            --text: #6b5356;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--warm-cream);
+            color: var(--text);
+            overflow: hidden;
+            touch-action: pan-y;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Floating Animation */
+        .heart {
+            position: fixed;
+            bottom: -2vh;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            animation: floatUp 4s ease-in forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Snap Container */
+        .scroller {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            height: 100vh;
+            width: 100vw;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroller::-webkit-scrollbar { display: none; }
+
+        .slide {
+            flex: 0 0 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--dusty-rose);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 280px;
+            font-weight: 300;
+        }
+
+        .bold {
+            color: var(--dusty-rose);
+            font-weight: 600;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            filter: grayscale(0.2);
+        }
+
+        .swipe-hint {
+            position: fixed;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            opacity: 0.4;
+            animation: breathe 2s infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.2; transform: translateX(0); }
+            50% { opacity: 0.5; transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroller">
+        <section class="slide">
+            <div class="icon">☁️</div>
+            <h1>hey.</h1>
+            <p>i made something for you because i couldn't just do nothing today.</p>
+        </section>
+
+        <section class="slide">
+            <div class="icon">⌛</div>
+            <h1>finally.</h1>
+            <p>i've been waiting to show you this for a bit... <span class="bold">13 days</span> was way harder to wait out than i thought.</p>
+        </section>
+
+        <section class="slide">
+            <div class="icon">🎀</div>
+            <h1>just so you know...</h1>
+            <p>you’re easily my <span class="bold">favorite person</span> to be around. things just feel better when you're there.</p>
+        </section>
+
+        <section class="slide">
+            <div class="icon">🧸</div>
+            <h1>a little reminder.</h1>
+            <p>i really hope you have the most peaceful and happy valentine's. you deserve all the good energy.</p>
+        </section>
+
+        <section class="slide">
+            <div class="icon">🌸</div>
+            <h1>happy valentine's.</h1>
+            <p>enjoy this day to the absolute fullest. <br><br> <span style="font-size: 0.8rem; opacity: 0.6;">(end)</span></p>
+        </section>
+    </div>
+
+    <div class="swipe-hint">SWIPE LEFT ➔</div>
+
+    <script>
+        const symbols = ['🌸', '🤍', '✨', '☁️', '🧸'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+
+        setInterval(createHeart, 600);
+    </script>
+</body>
+</html>
